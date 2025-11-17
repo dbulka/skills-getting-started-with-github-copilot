@@ -74,6 +74,67 @@ section h3 {
   margin-bottom: 8px;
 }
 
+/* New: Participants section inside activity cards */
+.activity-card .participants {
+  margin-top: 12px;
+}
+
+.activity-card .participants-header {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #0d47a1;
+  font-weight: 600;
+  display: block;
+}
+
+.activity-card .participants-list {
+  list-style: disc;
+  padding-left: 22px;
+  margin: 0;
+}
+
+/* Make each participant look tidy while preserving bullets */
+.activity-card .participants-list li {
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #ffffff, #f6f9ff);
+  border: 1px solid #e6ecff;
+  border-radius: 8px;
+  color: #1a237e;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  transition: background-color 0.15s, transform 0.08s;
+}
+
+/* Keep the bullet marker visible and colored to match the theme */
+.activity-card .participants-list li::marker {
+  color: #1a237e;
+  font-weight: 600;
+}
+
+/* Hover / focus states for visual affordance */
+.activity-card .participants-list li:hover,
+.activity-card .participants-list li:focus {
+  background-color: #eef4ff;
+  transform: translateY(-1px);
+}
+
+/* Empty-state message when no participants are signed up */
+.activity-card .participants-empty {
+  margin-top: 8px;
+  font-style: italic;
+  color: #666;
+  padding: 6px 8px;
+}
+
+/* Small-screen tweak to keep cards tidy */
+@media (max-width: 480px) {
+  .activity-card .participants-list li {
+    padding: 8px;
+    font-size: 0.92rem;
+  }
+}
+
 .form-group {
   margin-bottom: 15px;
 }

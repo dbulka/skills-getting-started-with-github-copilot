@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear loading message
       activitiesList.innerHTML = "";
 
+      // Clear and reset activity select to avoid duplicate options on reload
+      activitySelect.innerHTML = '<option value="" disabled selected>Select an activity</option>';
+
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
@@ -27,6 +30,32 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
 
+        // Build participants section (use DOM methods to avoid HTML injection)
+        const participantsWrap = document.createElement("div");
+        participantsWrap.className = "participants";
+
+        const header = document.createElement("span");
+        header.className = "participants-header";
+        header.textContent = "Participants";
+        participantsWrap.appendChild(header);
+
+        if (Array.isArray(details.participants) && details.participants.length > 0) {
+          const ul = document.createElement("ul");
+          ul.className = "participants-list";
+          details.participants.forEach((p) => {
+            const li = document.createElement("li");
+            li.textContent = p;
+            ul.appendChild(li);
+          });
+          participantsWrap.appendChild(ul);
+        } else {
+          const empty = document.createElement("div");
+          empty.className = "participants-empty";
+          empty.textContent = "No participants yet. Be the first to sign up!";
+          participantsWrap.appendChild(empty);
+        }
+
+        activityCard.appendChild(participantsWrap);
         activitiesList.appendChild(activityCard);
 
         // Add option to select dropdown
